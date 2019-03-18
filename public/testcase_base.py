@@ -1,7 +1,6 @@
 from public import utils
 from public.logger import *
 from public.config_base import *
-from public.utils import get_defaults
 
 class CaseBase(object):
     """
@@ -14,15 +13,8 @@ class CaseBase(object):
         :param logger: 日志的类
         :return:
         """
-        default = get_defaults()
-        if not config:
-            self._config = ConfigBase(default['config_path'])
-        else:
-            self._config = config
-        if not logger:
-            self._logger = RotatingLogger(default['log_path'])
-        else:
-            self._logger = logger
+        self._config = config
+        self._logger = logger
 
     def end(self):
         """

@@ -55,3 +55,12 @@ class Courses(models.Model):
     class Meta:
         managed = False
         db_table = 'courses'
+
+    def __str__(self):
+        return self.student
+
+class User(models.Model):
+    id = models.AutoField(db_column='id', max_length=10, primary_key=True)
+    username = models.CharField(db_column='username', max_length=255, blank=False, null=False)
+    password = models.CharField(db_column='password', max_length=255, blank=False, null=False)
+    email = models.CharField(db_column='email', max_length=255, blank=True, null=True)
