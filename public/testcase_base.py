@@ -1,3 +1,4 @@
+# encoding: utf-8
 from public import utils
 from public.logger import *
 from public.config_base import *

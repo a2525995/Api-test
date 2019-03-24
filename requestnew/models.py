@@ -29,16 +29,18 @@ class Sc(models.Model):
 
 
 class Student(models.Model):
-    sid = models.CharField(db_column='SId', unique=True, max_length=10, blank=True, null=True)  # Field name made lowercase.
+    sid = models.AutoField(db_column='SId', unique=True, max_length=10, primary_key=True)  # Field name made lowercase.
     sname = models.CharField(db_column='Sname', max_length=10, blank=True, null=True)  # Field name made lowercase.
     sage = models.DateTimeField(db_column='Sage', blank=True, null=True)  # Field name made lowercase.
     ssex = models.CharField(db_column='Ssex', max_length=10, blank=True, null=True)  # Field name made lowercase.
+
 
     class Meta:
         managed = False
         db_table = 'Student'
 
-
+    def __str__(self):
+        return self.sname
 class Teacher(models.Model):
     tid = models.CharField(db_column='TId', max_length=10, blank=True, null=True)  # Field name made lowercase.
     tname = models.CharField(db_column='Tname', max_length=10, blank=True, null=True)  # Field name made lowercase.

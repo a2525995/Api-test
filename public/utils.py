@@ -7,3 +7,8 @@ def create_dir(dir_path):
     else:
         os.mkdir(dir_path)
 
+def remove_file(file_path):
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+

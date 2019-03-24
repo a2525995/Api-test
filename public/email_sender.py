@@ -63,13 +63,7 @@ class EmailSender(object):
             sys.stdout.write("Success Send Email! " + "\n")
         except e:
             sys.stderr.write("Failed To Send Email" + "\n" + e)
-
-
-
-if __name__ == '__main__':
-    e = EmailSender("smtp.163.com",'17611263070@163.com', 'Test12345', 25)
-    e.add_message(None)
-    e.add_header("17611263070@163.com", "yusei1098340607@163.com", "dante sender")
-    e.send("17611263070@163.com", "yusei1098340607@163.com")
+        finally:
+            self.email.quit()
 
 

@@ -21,9 +21,15 @@ def accept_message(request):
 
 
 def get_model(request):
-    obj = Course.objects.all()
+    obj = Student.objects.all().values_list('sid', flat=True)
+
     print(obj)
-    return obj
+    obj = list(obj)
+    print(type(obj[1]))
+    d = {
+        "test": obj
+    }
+    return JsonResponse(data=d, safe=False)
 
 
 
