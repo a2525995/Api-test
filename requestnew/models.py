@@ -7,62 +7,34 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-
-class Course(models.Model):
-    cid = models.CharField(db_column='CId', max_length=10, blank=True, null=True)  # Field name made lowercase.
-    cname = models.CharField(db_column='Cname', max_length=10, blank=True, null=True)  # Field name made lowercase.
-    tid = models.CharField(db_column='TId', max_length=10, blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'Course'
-
-
-class Sc(models.Model):
-    sid = models.CharField(db_column='SId', max_length=10, blank=True, null=True)  # Field name made lowercase.
-    cid = models.CharField(db_column='CId', max_length=10, blank=True, null=True)  # Field name made lowercase.
-    score = models.DecimalField(max_digits=18, decimal_places=1, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'SC'
-
-
-class Student(models.Model):
-    sid = models.AutoField(db_column='SId', unique=True, max_length=10, primary_key=True)  # Field name made lowercase.
-    sname = models.CharField(db_column='Sname', max_length=10, blank=True, null=True)  # Field name made lowercase.
-    sage = models.DateTimeField(db_column='Sage', blank=True, null=True)  # Field name made lowercase.
-    ssex = models.CharField(db_column='Ssex', max_length=10, blank=True, null=True)  # Field name made lowercase.
-
-
-    class Meta:
-        managed = False
-        db_table = 'Student'
-
-    def __str__(self):
-        return self.sname
-class Teacher(models.Model):
-    tid = models.CharField(db_column='TId', max_length=10, blank=True, null=True)  # Field name made lowercase.
-    tname = models.CharField(db_column='Tname', max_length=10, blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'Teacher'
-
-
-class Courses(models.Model):
-    student = models.CharField(max_length=255, blank=True, null=True)
-    class_field = models.CharField(db_column='class', max_length=255, blank=True, null=True)  # Field renamed because it was a Python reserved word.
-
-    class Meta:
-        managed = False
-        db_table = 'courses'
-
-    def __str__(self):
-        return self.student
-
 class User(models.Model):
-    id = models.AutoField(db_column='id', max_length=10, primary_key=True)
-    username = models.CharField(db_column='username', max_length=255, blank=False, null=False)
-    password = models.CharField(db_column='password', max_length=255, blank=False, null=False)
-    email = models.CharField(db_column='email', max_length=255, blank=True, null=True)
+    uid = models.AutoField(db_column='uid', max_length=10, primary_key=True, null=False ,unique=True)
+    username = models.CharField(db_column='username', max_length=150, null=False, blank=False)
+    password = models.CharField(db_column='password', max_length=150, null=False, blank=False)
+    email = models.CharField(db_column='email', max_length=254, null=True, unique=True)
+    name = models.CharField(db_column='name', max_length=150, null=True, blank=True)
+    create_time = models.DateField(db_column='create_time', max_length=30, auto_now_add=True)
+    last_login = models.DateTimeField(db_column='last_login', max_length=30, auto_now=True)
+    phone = models.CharField(max_length=11, null=True, unique=True)
+
+class Publish(models.Model):
+    name = models.CharField(max_length=64)
+    city = models.CharField(max_length=63,null=True)
+    def __str__(self):
+        return self.name
+
+class Author(models.Model):
+    name = models.CharField(max_length=30)
+    sex = models.CharField(max_length=20)
+    def __str__(self):
+        return self.name
+
+class Book(models.Model):
+    title = models.CharField(max_length=64)
+    price = models.IntegerField()
+    color = models.CharField(max_length=64)
+    page_num = models.IntegerField(null=True)
+    publisher = models.ForeignKey("Publish",on_delete=models.CASCADE,null=True)  #一对多的关系。2.0django中，当有主外键和其他对应关系时，需要设置。
+    author = models.ManyToManyField("Author")
+    def __str__(self):
+        return  self.title

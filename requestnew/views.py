@@ -19,9 +19,9 @@ def accept_message(request):
     log.info("123")
     return JsonResponse(data, status=200)
 
-
+#
 def get_model(request):
-    obj = Student.objects.all().values_list('sid', flat=True)
+    obj = User.objects.all().values()
 
     print(obj)
     obj = list(obj)
