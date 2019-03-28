@@ -47,12 +47,18 @@ class EmailSender(object):
         # with open(html_file, 'rb') as f:
         #     msg_text = f.read()
         #     f.close()
-        msg_text = ""
+        msg_text = html_file
         msg = MIMEText(msg_text, 'html', 'utf-8')
         self.message = MIMEMultipart()
         self.message.attach(msg)
 
     def add_header(self, s_from, s_to, s_subject):
+        # 处理发送多人邮件时的方式
+        if isinstance(s_to, list):
+            if len(s_to) == 1:
+                s_to = str(s_to[0])
+            else:
+                s_to = ','.join(s_to)
         self.message['from'] = s_from
         self.message['to'] = s_to
         self.message['subject'] = Header(s_subject, 'utf-8')
