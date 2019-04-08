@@ -77,21 +77,20 @@ WSGI_APPLICATION = 'yamoto.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {},
-    'grafana': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'grafana',
         'USER': 'root',
         'PASSWORD': '123456',
         'HOST':'localhost',
-        'PORT':'3306',
-    },
+        'PORT':'3306',},
+
 }
 DATABASE_ROUTERS = ['yamoto.database_router.DatabaseAppsRouter']
 DATABASE_APPS_MAPPING = {
     # example:
     #'app_name':'database_name',
-    'requestnew': 'grafana',
+    'requestnew': 'default',
 }
 
 # Password validation
@@ -126,13 +125,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+#AUTH_USER_MODEL = 'requestnew.UserInfo'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "requestnew/static"),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 LOG_PATH = os.path.join(BASE_DIR, ("log/api.log"))
 

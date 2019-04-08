@@ -1,5 +1,5 @@
 # encoding: utf-8
-from public import utils
+import public.utils
 from public.logger import *
 from public.config_base import *
 from abc import ABCMeta,abstractmethod

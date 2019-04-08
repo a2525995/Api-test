@@ -12,7 +12,7 @@ class Job():
     def __deal_time(self, time):
         time = time.strip()
         time = time.split()
-        print(time)
+
         for args in range(len(time)):
             if time[args] == "*":
                 time[args] = None

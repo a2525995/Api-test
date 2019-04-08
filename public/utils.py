@@ -1,9 +1,13 @@
 # encoding: utf-8
 import os
+import requests
+import base64
+import re
+import hashlib
 
 def create_dir(dir_path):
     if os.path.isdir(dir_path):
-        raise OSError("Direct almost exist")
+        pass
     else:
         os.mkdir(dir_path)
 
@@ -68,5 +72,35 @@ def change_str_by_list(str, array, replace_array):
         replace_string = replace_array[idx]
         str = replace_str(str, string, replace_string)
     return str
+
+def check_email(email):
+    """
+    检测邮箱格式
+    :param email:
+    :return:
+    """
+    if not isinstance(email, str):
+        raise Exception("Input email need a string type")
+
+    if not re.match(r'^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$', email):
+        return False
+    return True
+
+def check_phone(phone):
+    """
+    检测手机号格式
+    :param phone:
+    :return:
+    """
+    if not isinstance(phone, str):
+        raise Exception("Input email need a string type")
+
+    if not re.match(r'^(13\d|14[5|7]|15\d|166|17[3|6|7]|18\d)\d{8}$', phone):
+        return False
+    return True
+
+def sha_256(string):
+    return hashlib.sha256(string.encode(encoding='utf-8')).hexdigest()
+
 
 

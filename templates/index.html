@@ -90,7 +90,7 @@
                     <h1>登录控制台</h1>
                 </header>
                 <div class="kit-login-main">
-                    <form action="/login_action/test/1" class="layui-form" method="post">
+                    <form action="/login_action/login" class="layui-form" method="post">
                         <div class="layui-form-item">
                             <label class="kit-login-icon">
                                 <i class="layui-icon">&#xe612;</i>
@@ -100,9 +100,14 @@
                         </div>
                         <div class="layui-form-item">
                             <div class="kit-pull-right">
-                                <button class="layui-btn layui-btn-primary" lay-submit lay-filter="login">
+                                <button class="layui-btn layui-btn-primary" lay-filter="login">
                                     <i class="fa fa-sign-in" aria-hidden="true"></i> 登入
                                 </button>
+                            </div>
+                            <div class="kit-pull-right">
+                                <div class="layui-btn layui-btn-primary" onclick="toRegister()" onsubmit="False">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i> 注册
+                                </div>
                             </div>
                             <div class="kit-clear"></div>
                         </div>
@@ -127,54 +132,62 @@
 <script src="{% static "plugins/sideshow/js/rAF.js"%}"></script>
 <script src="{% static "plugins/sideshow/js/demo-1.js" %}"></script>
 <script>
-    var userKey;
-    layui.config({
-        base: '{% static "/js/ext/" %}'
-    }).use(['layer', 'form', 'rmputils'], function() {
-        var layer = layui.layer,
-            form = layui.form,
-            rmputil = layui.rmputils;
-
-        var index = layer.load(2, {
-            shade: [0.3, '#333']
-        });
-        $(window).on('load', function() {
-            layer.close(index);
-            form.on('submit(login)', function(data) {
-                if (rmputil.stringUtils.isEmpty(data.field.userKey)) {
-                    layer.msg('不能为空', {icon:5, time:1500});
-                    return false;
-                }
-                $.post(VALIDATE_USER_KEY_URL, {userKey:data.field.userKey}, function(json){
-                    validatReturnJson(json, function(){
-                        window.location.href = './index.html';
-                        layui.data('rmp', {
-                            key:'userKey',
-                            value:json.data.userKey
-                        });
-                    })
-                });
-                return false;
-            });
-
-            //获取本地是否已存在userKey
-            var rmpTable = layui.data('rmp');
-            rmpTable != null && (userKey = rmpTable.userKey);
-            if (userKey != null) {
-                $.post(VALIDATE_USER_KEY_URL, {userKey:userKey}, function(json){
-                    validatReturnJson(json, function(){
-                        window.location.href = './index.html';
-                        layui.data('rmp', {
-                            key:'userKey',
-                            value:json.data.userKey
-                        });
-                    })
-                });
-            }
-        }());
-
-    });
+    function toRegister() {
+    // alert("跳转到注册");
+    //在原有窗口打开
+    window.location.href = "{% url 'register' %}";
+    //打开新的窗口
+}
 </script>
+{#<script>#}
+{#    var userKey;#}
+{#    layui.config({#}
+{#        base: '{% static "/js/ext/" %}'#}
+{#    }).use(['layer', 'form', 'rmputils'], function() {#}
+{#        var layer = layui.layer,#}
+{#            form = layui.form,#}
+{#            rmputil = layui.rmputils;#}
+{##}
+{#        var index = layer.load(2, {#}
+{#            shade: [0.3, '#333']#}
+{#        });#}
+{#        $(window).on('load', function() {#}
+{#            layer.close(index);#}
+{#            form.on('submit(login)', function(data) {#}
+{#                if (rmputil.stringUtils.isEmpty(data.field.userKey)) {#}
+{#                    layer.msg('不能为空', {icon:5, time:1500});#}
+{#                    return false;#}
+{#                }#}
+{#                $.post(VALIDATE_USER_KEY_URL, {userKey:data.field.userKey}, function(json){#}
+{#                    validatReturnJson(json, function(){#}
+{#                        window.location.href = './index.html';#}
+{#                        layui.data('rmp', {#}
+{#                            key:'userKey',#}
+{#                            value:json.data.userKey#}
+{#                        });#}
+{#                    })#}
+{#                });#}
+{#                return false;#}
+{#            });#}
+{##}
+{#            //获取本地是否已存在userKey#}
+{#            var rmpTable = layui.data('rmp');#}
+{#            rmpTable != null && (userKey = rmpTable.userKey);#}
+{#            if (userKey != null) {#}
+{#                $.post(VALIDATE_USER_KEY_URL, {userKey:userKey}, function(json){#}
+{#                    validatReturnJson(json, function(){#}
+{#                        window.location.href = './index.html';#}
+{#                        layui.data('rmp', {#}
+{#                            key:'userKey',#}
+{#                            value:json.data.userKey#}
+{#                        });#}
+{#                    })#}
+{#                });#}
+{#            }#}
+{#        }());#}
+{##}
+{#    });#}
+{#</script>#}
 </body>
 
 </html>

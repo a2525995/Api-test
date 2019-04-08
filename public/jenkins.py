@@ -1,13 +1,13 @@
-from Common.Config import Config
-from Common.utils import *
-from Common.email_sender import EmailSender
+from public.config_base import ConfigBase
+from public.utils import *
+from public.email_sender import EmailSender
 import os
 
 JENKINS_CONF = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'Conf/jenkins.conf')
-TEMPLATE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static/test.html')
+TEMPLATE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static/jenkins.html')
 
 def get_jenkins_conf(path):
-    conf = Config(path)
+    conf = ConfigBase(path)
     git_url = conf.get_config('jenkins', 'git_url', '')
     username = conf.get_config('jenkins', 'username')
     password = conf.get_config('jenkins', 'password')
@@ -15,7 +15,7 @@ def get_jenkins_conf(path):
     return username, password, git_url, replace
 
 def get_email_conf(path):
-    conf = Config(path)
+    conf = ConfigBase(path)
     username = conf.get_config('smtp', 'username')
     password = conf.get_config('smtp', 'password')
     smtp_server = conf.get_config('smtp', 'smtp_server')

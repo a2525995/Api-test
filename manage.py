@@ -3,7 +3,8 @@ import os
 import sys
 
 if __name__ == '__main__':
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'yamoto.settings')
+    os.environ.update({"DJANGO_SETTINGS_MODULE": "yamoto.settings"})
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', '/Users/koushushin/PycharmProjects/yamoto/yamoto.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
