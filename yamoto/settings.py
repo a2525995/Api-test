@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = "account.User"
+
+
 
 # Application definition
 
@@ -92,12 +95,12 @@ DATABASES = {
         'PORT':'3306',},
 
 }
-DATABASE_ROUTERS = ['yamoto.database_router.DatabaseAppsRouter']
-DATABASE_APPS_MAPPING = {
-    # example:
-    #'app_name':'database_name',
-    'requestnew': 'default',
-}
+# DATABASE_ROUTERS = ['yamoto.database_router.DatabaseAppsRouter']
+# DATABASE_APPS_MAPPING = {
+#     # example:
+#     #'app_name':'database_name',
+#     'requestnew': 'default',
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

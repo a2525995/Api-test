@@ -87,26 +87,28 @@
             <canvas id="demo-canvas"></canvas>
             <div class="kit-login-box">
                 <header>
-                    <h1>登录控制台</h1>
+                    <h3 align="center"><b>注册</b></h3>
                 </header>
                 <div class="kit-login-main">
-                    <form action="/login_action/login" class="layui-form" method="post">
+                    <form action="/login_action/register/" class="layui-form" method="post">
                         <div class="layui-form-item">
                             <label class="kit-login-icon">
                                 <i class="layui-icon">&#xe612;</i>
                             </label>
                             <input type="text" name="form-username" placeholder="Username..." autocomplete="off" id="form-username" class="layui-input">
                             <input type="password" name="form-password" placeholder="Password..." class="layui-input" id="form-password">
+                            <input type="email" name="form-email" placeholder="Email..." class="layui-input" id="form-password">
+                            <input type="phone" name="form-phone" placeholder="Phone..." class="layui-input" id="form-password">
                         </div>
                         <div class="layui-form-item">
                             <div class="kit-pull-right">
-                                <button class="layui-btn layui-btn-primary" lay-filter="login">
-                                    <i class="fa fa-sign-in" aria-hidden="true"></i> 登入
+                                <button class="layui-btn layui-btn-primary" lay-submit lay-filter="login">
+                                    <i class="fa fa-sign-in" aria-hidden="true" ></i> 注册
                                 </button>
                             </div>
                             <div class="kit-pull-right">
-                                <div class="layui-btn layui-btn-primary" onclick="toRegister()" onsubmit="False">
-                                    <i class="fa fa-sign-in" aria-hidden="true"></i> 注册
+                                <div class="layui-btn layui-btn-primary" lay-submit lay-filter="login" onclick="toMain()">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i> 返回
                                 </div>
                             </div>
                             <div class="kit-clear"></div>
@@ -132,10 +134,10 @@
 <script src="{% static "plugins/sideshow/js/rAF.js"%}"></script>
 <script src="{% static "plugins/sideshow/js/demo-1.js" %}"></script>
 <script>
-    function toRegister() {
-    // alert("跳转到注册");
+    function toMain() {
+    // alert("跳转到图书列表");
     //在原有窗口打开
-    window.location.href = "{% url 'register' %}";
+    window.location.href = "{% url 'main' %}";
     //打开新的窗口
 }
 </script>

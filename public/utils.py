@@ -4,6 +4,7 @@ import requests
 import base64
 import re
 import hashlib
+import time
 
 def create_dir(dir_path):
     if os.path.isdir(dir_path):
@@ -102,5 +103,7 @@ def check_phone(phone):
 def sha_256(string):
     return hashlib.sha256(string.encode(encoding='utf-8')).hexdigest()
 
+def get_current():
+    return time.time()
 
 
