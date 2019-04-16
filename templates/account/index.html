@@ -76,6 +76,10 @@
             border-color: #009688;
             color: #009688
         }
+        a:hover {
+            border-color: #009688;
+            color: #009688;
+        }
     </style>
 </head>
 
@@ -87,10 +91,10 @@
             <canvas id="demo-canvas"></canvas>
             <div class="kit-login-box">
                 <header>
-                    <h1>登录控制台</h1>
+                    <h1>Glaucus Test Platform</h1>
                 </header>
                 <div class="kit-login-main">
-                    <form action="/login_action/login/" class="layui-form" method="post">
+                    <form action="/" id="form-register" class="layui-form" method="post">
                         <div class="layui-form-item">
                             <label class="kit-login-icon">
                                 <i class="layui-icon">&#xe612;</i>
@@ -99,15 +103,19 @@
                             <input type="password" name="form-password" placeholder="Password..." class="layui-input" id="form-password">
                         </div>
                         <div class="layui-form-item">
-                            <div class="kit-pull-right">
-                                <button class="layui-btn layui-btn-primary" lay-filter="login">
-                                    <i class="fa fa-sign-in" aria-hidden="true"></i> 登入
+
+                            <div class="kit-pull-right" style="float: left!important;">
+                                <button type="button" class="layui-btn layui-btn-primary test" onclick="toRegister()">
+                                    <i class="layui-icon layui-icon-return " style="font-size: 10px" aria-hidden="true"></i> 注册
                                 </button>
                             </div>
                             <div class="kit-pull-right">
-                                <div class="layui-btn layui-btn-primary" onclick="toRegister()" onsubmit="False">
-                                    <i class="fa fa-sign-in" aria-hidden="true"></i> 注册
-                                </div>
+                                <button class="layui-btn layui-btn-primary test" lay-filter="login" onclick="check_form()">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i> 登入
+                                </button>
+                            </div>
+
+                            <div>
                             </div>
                             <div class="kit-clear"></div>
                         </div>
@@ -118,6 +126,9 @@
                     </form>
                 </div>
                 <footer>
+                    <div style="text-align:center; margin:0 auto" class="test">
+                    <a href="/reset_password"> forget your password? </a>
+                    </div>
                     <p>Api Testing Monitoring Platform ©</p>
                 </footer>
             </div>
@@ -138,6 +149,10 @@
     window.location.href = "{% url 'register' %}";
     //打开新的窗口
 }
+
+    function check_form() {
+
+    }
 </script>
 {#<script>#}
 {#    var userKey;#}

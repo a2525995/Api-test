@@ -14,7 +14,8 @@ class User(AbstractUser):
     last_login = models.DateTimeField(db_column='last_login', max_length=30, auto_now=True)
     phone = models.CharField(db_column='phone', max_length=11, null=True, unique=True)
     is_active = models.BooleanField(db_column='is_active', default=True)
-
+    is_developer = models.BooleanField(db_column='is_developer', default=False)
+    is_adminisator = models.BooleanField(db_column='is_adminisator', default=False)
 
     class Meta:
         verbose_name = '用户信息'
@@ -39,3 +40,18 @@ class User(AbstractUser):
     def delete_user(cls):
         cls.is_active = False
         return True
+
+    @classmethod
+    def become_user(cls):
+        cls.is_adminisator = False
+        cls.is_developer = False
+
+    @classmethod
+    def become_adminisator(cls):
+        cls.is_adminisator = True
+        cls.is_developer = False
+
+    @classmethod
+    def become_superadmin(cls):
+        cls.is_developer = True
+        cls.is_adminisator = True
