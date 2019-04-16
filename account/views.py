@@ -4,7 +4,8 @@ from public.utils import *
 from .models import User
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 import logging
 from django.views.generic import TemplateView
@@ -82,6 +83,29 @@ def login_action(request):
         login(request, user)
         return JsonResponse({"msg": "success"})
 
-    #用户名 密码不正确
+    #用户名 密码不正确 或者用户已被禁用
     return redirect(reverse('main'))
 
+@require_http_methods(['POST'])
+def find_back(request):
+    username = request.POST.get("form-username")
+    try:
+        user = User.objects.get(username=username)
+    except ObjectDoesNotExist:
+        logger.error("User havn't register in system")
+        return HttpResponse("44444")
+
+    if not user.is_active:
+        return JsonResponse({'msg': "user not authorized"})
+
+    #TODO(koushushin): send email
+
+
+
+
+def logout_action(request):
+    try:
+        logout(request)
+    except Exception:
+        pass
+    return HttpResponseRedirect(reverse('main'))

@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
-from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from requestnew.models import *
 import logging
 from public.utils import check_email, check_phone, sha_256
